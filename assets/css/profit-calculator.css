@@ -1,0 +1,398 @@
+/*
+ * Profit Margin Calculator Styles
+ * @package Xgenious
+ * @since 1.0.0
+ *
+ * Prefix: pmc- (Profit Margin Calculator)
+ * Uses existing CSS variables from report-landing.css
+ */
+
+/* ===========================
+   Container & Layout
+   =========================== */
+.pmc-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: var(--rg-body-font1);
+}
+
+/* Header */
+.pmc-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.pmc-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--rg-heading-color);
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.pmc-subtitle {
+    font-size: 16px;
+    color: var(--rg-paragraph-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Form Layout */
+.pmc-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "inputs results"
+        "actions results";
+    gap: 40px;
+    align-items: start;
+}
+
+.pmc-inputs-section {
+    grid-area: inputs;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pmc-results-section {
+    grid-area: results;
+    position: sticky;
+    top: 20px;
+}
+
+/* ===========================
+   Input Fields
+   =========================== */
+.pmc-input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.pmc-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--rg-heading-color);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.pmc-label .required-mark {
+    color: #ff4444;
+    margin-left: 2px;
+}
+
+.pmc-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.pmc-input {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 16px;
+    font-family: var(--rg-body-font1);
+    color: var(--rg-heading-color);
+    border: 1px solid var(--rg-paragraph-color2);
+    border-radius: 8px;
+    background-color: var(--rg-white-color);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.pmc-input:focus {
+    border-color: var(--rg-primary-color);
+    box-shadow: 0 0 0 3px rgba(107, 90, 247, 0.1);
+}
+
+.pmc-input::placeholder {
+    color: #999;
+    opacity: 0.7;
+}
+
+/* Currency and Percent Symbols */
+.pmc-currency-symbol,
+.pmc-percent-symbol {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--rg-paragraph-color);
+    pointer-events: none;
+}
+
+.pmc-currency-symbol {
+    left: 16px;
+}
+
+.pmc-percent-symbol {
+    right: 16px;
+}
+
+/* Adjust input padding when symbols present */
+.pmc-input-wrapper:has(.pmc-currency-symbol) .pmc-input {
+    padding-left: 32px;
+}
+
+.pmc-input-wrapper:has(.pmc-percent-symbol) .pmc-input {
+    padding-right: 40px;
+}
+
+/* ===========================
+   Buttons & Actions
+   =========================== */
+.pmc-actions {
+    grid-area: actions;
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.pmc-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--rg-body-font1);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    text-decoration: none;
+}
+
+.pmc-btn-reset {
+    background-color: transparent;
+    color: var(--rg-heading-color);
+    border-color: var(--rg-paragraph-color2);
+    min-width: 100px;
+}
+
+.pmc-btn-reset:hover {
+    background-color: var(--rg-white-one);
+    border-color: var(--rg-heading-color);
+}
+
+.pmc-btn-calculate {
+    background-color: var(--rg-primary-color);
+    color: var(--rg-white-color);
+    flex: 1;
+}
+
+.pmc-btn-calculate:hover:not(:disabled) {
+    background-color: #5548d8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 90, 247, 0.3);
+}
+
+.pmc-btn-calculate:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===========================
+   Results Section
+   =========================== */
+.pmc-results-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--rg-heading-color);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.pmc-results {
+    background-color: var(--rg-white-one);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(5, 20, 65, 0.08);
+}
+
+.pmc-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rg-paragraph-color2);
+}
+
+.pmc-result-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.pmc-result-item:first-child {
+    padding-top: 0;
+}
+
+/* Highlighted result (Gross Margin) */
+.pmc-result-item.highlight {
+    background-color: rgba(107, 90, 247, 0.05);
+    padding: 16px;
+    margin: 0 -16px;
+    border-radius: 8px;
+    border-bottom: none;
+}
+
+.pmc-result-item.highlight + .pmc-result-item {
+    padding-top: 16px;
+}
+
+.pmc-result-label {
+    font-size: 14px;
+    color: var(--rg-paragraph-color);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.pmc-result-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--rg-heading-color);
+    line-height: 1.2;
+}
+
+/* Highlighted result value */
+.pmc-result-item.highlight .pmc-result-value {
+    color: var(--rg-primary-color);
+    font-size: 24px;
+}
+
+/* Negative values (losses) */
+.pmc-result-value.negative {
+    color: #ff4444;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .pmc-form {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "inputs"
+            "actions"
+            "results";
+        gap: 30px;
+    }
+
+    .pmc-results-section {
+        position: static;
+    }
+
+    .pmc-title {
+        font-size: 28px;
+    }
+
+    .pmc-subtitle {
+        font-size: 15px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .pmc-container {
+        padding: 30px 15px;
+    }
+
+    .pmc-header {
+        margin-bottom: 30px;
+    }
+
+    .pmc-title {
+        font-size: 24px;
+    }
+
+    .pmc-subtitle {
+        font-size: 14px;
+    }
+
+    .pmc-form {
+        gap: 25px;
+    }
+
+    .pmc-inputs-section {
+        gap: 16px;
+    }
+
+    .pmc-actions {
+        flex-direction: column;
+    }
+
+    .pmc-btn {
+        width: 100%;
+    }
+
+    .pmc-btn-reset {
+        order: 2;
+    }
+
+    .pmc-btn-calculate {
+        order: 1;
+    }
+
+    .pmc-results {
+        padding: 20px;
+    }
+
+    .pmc-result-value {
+        font-size: 18px;
+    }
+
+    .pmc-result-item.highlight .pmc-result-value {
+        font-size: 20px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 400px) {
+    .pmc-input {
+        font-size: 14px;
+        padding: 11px 14px;
+    }
+
+    .pmc-currency-symbol {
+        left: 14px;
+    }
+
+    .pmc-percent-symbol {
+        right: 14px;
+    }
+
+    .pmc-input-wrapper:has(.pmc-currency-symbol) .pmc-input {
+        padding-left: 28px;
+    }
+
+    .pmc-input-wrapper:has(.pmc-percent-symbol) .pmc-input {
+        padding-right: 36px;
+    }
+}
+
+/* ===========================
+   Print Styles (Optional)
+   =========================== */
+@media print {
+    .pmc-actions {
+        display: none;
+    }
+
+    .pmc-container {
+        padding: 20px;
+    }
+
+    .pmc-form {
+        grid-template-columns: 1fr;
+    }
+
+    .pmc-results {
+        box-shadow: none;
+        border: 1px solid var(--rg-paragraph-color2);
+    }
+}
