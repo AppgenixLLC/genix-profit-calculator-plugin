@@ -54,6 +54,10 @@ class Genix_PMC_Shortcode {
             'custom_class' => '',
         ), $atts, 'profit_calculator');
 
+        // Enqueue assets for this specific shortcode instance
+        wp_enqueue_style('genix-pmc-calculator');
+        wp_enqueue_script('genix-pmc-calculator');
+
         // Start output buffering
         ob_start();
         ?>
