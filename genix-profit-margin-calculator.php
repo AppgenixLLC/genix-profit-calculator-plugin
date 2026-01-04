@@ -3,7 +3,7 @@
  * Plugin Name: Genix Profit Margin Calculator
  * Plugin URI: https://genix.com/profit-margin-calculator
  * Description: A powerful profit margin calculator shortcode that helps calculate sale prices, profit margins, and business metrics instantly. Client-side calculations with beautiful UI.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Genix Team
  * Author URI: https://genix.com
  * Text Domain: genix-pmc
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('GENIX_PMC_VERSION', '1.0.0');
+define('GENIX_PMC_VERSION', '1.0.1');
 define('GENIX_PMC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('GENIX_PMC_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('GENIX_PMC_PLUGIN_FILE', __FILE__);
@@ -97,10 +97,13 @@ class Genix_Profit_Margin_Calculator {
      * Enqueue CSS and JavaScript
      */
     public function enqueue_assets() {
+        // Get plugin URL with correct protocol (force HTTPS if page is HTTPS)
+        $plugin_url = set_url_scheme(GENIX_PMC_PLUGIN_URL, is_ssl() ? 'https' : 'http');
+
         // Enqueue CSS
         wp_enqueue_style(
             'genix-pmc-calculator',
-            GENIX_PMC_PLUGIN_URL . 'assets/css/profit-calculator.css',
+            $plugin_url . 'assets/css/profit-calculator.css',
             array(),
             GENIX_PMC_VERSION,
             'all'
@@ -109,7 +112,7 @@ class Genix_Profit_Margin_Calculator {
         // Enqueue JavaScript
         wp_enqueue_script(
             'genix-pmc-calculator',
-            GENIX_PMC_PLUGIN_URL . 'assets/js/profit-calculator.js',
+            $plugin_url . 'assets/js/profit-calculator.js',
             array('jquery'),
             GENIX_PMC_VERSION,
             true
