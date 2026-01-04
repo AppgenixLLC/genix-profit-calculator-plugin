@@ -57,7 +57,7 @@ class Genix_PMC_Shortcode {
         // Start output buffering
         ob_start();
         ?>
-        <div class="pmc-container <?php echo esc_attr($atts['custom_class']); ?>">
+        <div class="pmc-container <?php echo esc_attr($atts['custom_class']); ?>" id="pmc-container__genix-profit-margin-calculator" >
             <div class="pmc-header">
                 <h2 class="pmc-title"><?php echo esc_html($atts['title']); ?></h2>
                 <p class="pmc-subtitle"><?php echo esc_html($atts['subtitle']); ?></p>
